@@ -103,6 +103,9 @@ Philosopher 4 has finished eating.
 All philosophers finished without deadlock.
 */
 
+gcc filename.c -o output -pthread
+./output
+
 Sir/Ma'am, this program demonstrates the Dining Philosophers Problem in Operating Systems. 
  There are five philosophers sitting around a circular table with five forks. 
  Each philosopher needs two forks to eat.
