@@ -100,3 +100,49 @@ Enter Maximum Demand Matrix (5 x 3):
 Enter Available Resources (3 values):
 3 3 2
 */
+
+
+Sir/Ma'am, this program implements Banker's Algorithm, which is used for deadlock avoidance in Operating Systems.
+ It takes the Allocation Matrix, Maximum Demand Matrix, and Available Resources as input. 
+ It calculates the Need Matrix and checks whether all processes can complete execution safely.
+
+ Q1. What is Banker's Algorithm?
+
+It is a deadlock avoidance algorithm used to check whether resource allocation is safe.
+
+Q2. Why is it called Banker's Algorithm?
+
+Because it works like a banker who grants loans only when sufficient resources remain to satisfy future demands safely.
+
+Q3. What is a safe sequence?
+
+An order in which all processes can complete their execution.
+
+Q4. What is the Need Matrix formula?
+
+Need = Maximum − Allocation.
+
+Q5. What is the use of the Available array?
+
+It stores the number of currently available resources of each type.
+
+Q6. What is the purpose of the Work array?
+
+It temporarily tracks available resources while checking processes.
+
+Q7. What is the purpose of finished[]?
+
+It tracks which processes have completed execution.
+
+Q8. What happens when no process can execute?
+
+The system is declared unsafe because no complete safe sequence is found.
+
+Q9. What is deadlock avoidance?
+
+It is a technique that prevents the system from entering an unsafe state through careful resource allocation.
+
+Q10. What is the difference between safe and unsafe states?
+- Safe: A safe sequence exists.
+- Unsafe: No safe sequence exists.
+ If all processes can finish, the system is in a safe state; otherwise, it is in an unsafe state.
