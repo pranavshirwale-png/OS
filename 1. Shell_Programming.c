@@ -185,41 +185,33 @@ Goodbye!
  I have used fread() and fwrite() for reading and writing records."
 
 
-Q1. What is a process?
+Q1. What is file handling?
 
-A process is a program that is currently executing.
+File handling is used to store and retrieve data permanently in files.
 
-Q2. What is fork()?
+Q2. What is a structure in C?
 
-It is a system call used to create a child process.
+A structure is a user-defined data type that groups different types of variables together.
 
-Q3. What is the difference between parent and child process?
+Q3. Why do we use a binary file?
 
-The parent creates the child using fork(). Both execute independently.
+A binary file stores data in binary format and allows efficient reading and writing of structures.
 
-Q4. What is PID?
+Q4. Why is temp.dat used?
 
-PID stands for Process ID. It uniquely identifies a process.
+It temporarily stores all records except the record that needs to be deleted.
 
-Q5. What is a zombie process?
+Q5. What is the difference between fread() and fwrite()?
+- fread() reads data from a file.
+- fwrite() writes data into a file.
+Q6. What is the use of fseek()?
 
-A terminated child process whose exit status has not yet been collected by its parent.
+It moves the file pointer to a specific position in the file.
 
-Q6. What is an orphan process?
+Q7. Why is typedef struct used?
 
-A child process whose parent has terminated while the child is still running.
+It creates an easy-to-use name Record for the structure.
 
-Q7. How can we remove a zombie process?
+Q8. What happens if we insert an existing ID?
 
-The parent should collect its exit status using wait() or waitpid().
-
-Q8. What is the difference between getpid() and getppid()?
-- getpid() returns the current process ID.
-- getppid() returns the parent process ID.
-Q9. What is the use of waitpid()?
-
-It makes the parent wait for a specific child process and collect its termination status.
-
-Q10. Which sorting technique is used?
-
-Bubble Sort.
+The program displays a message that the ID already exists and does not insert the duplicate record.
