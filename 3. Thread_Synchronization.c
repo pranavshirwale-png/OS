@@ -86,3 +86,48 @@ Consumer consumed: 8
 Consumer consumed: 9
 Consumer consumed: 10
 */
+
+
+"Sir/Ma'am, this program demonstrates the Producer-Consumer problem in Operating Systems. 
+ The producer generates 10 items and stores them in a shared buffer of size 5.
+ The consumer takes items from the buffer. 
+ Semaphores are used to manage empty and full buffer slots, while a mutex lock prevents both threads from accessing the buffer simultaneously.
+
+ Q1. What is the Producer-Consumer problem?
+
+It is a synchronization problem where one process produces data and another process consumes it using a shared buffer.
+
+Q2. Why is buffer size 5?
+
+Because the buffer can store a maximum of five items at a time.
+
+Q3. Why are two semaphores used?
+- empty_slots tracks empty positions.
+- full_slots tracks filled positions.
+Q4. What is a mutex?
+
+A mutex is a locking mechanism that allows only one thread to access a critical section at a time.
+
+Q5. What is a thread?
+
+A thread is the smallest unit of execution within a process.
+
+Q6. What happens when the buffer is full?
+
+The producer waits until the consumer removes an item.
+
+Q7. What happens when the buffer is empty?
+
+The consumer waits until the producer inserts an item.
+
+Q8. What is a race condition?
+
+A situation where multiple threads access shared data simultaneously and produce unpredictable results.
+
+Q9. Why do we use pthread_join()?
+
+To make the main thread wait until the producer and consumer threads complete execution.
+
+Q10. What is the difference between semaphore and mutex?
+
+A semaphore manages resource availability using a counter, whereas a mutex provides mutual exclusion using a lock.
