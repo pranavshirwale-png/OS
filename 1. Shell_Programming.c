@@ -178,3 +178,48 @@ Record not found.
 Enter your choice: f
 Goodbye!
 */
+
+
+"Sir/Ma'am, this is an Address Book program using file handling in C. I have used a structure to store ID, name, phone number, and email. 
+ The records are stored permanently in a binary file. Using a menu-driven switch statement, we can create, view, insert, delete, and modify records.
+ I have used fread() and fwrite() for reading and writing records."
+
+
+Q1. What is a process?
+
+A process is a program that is currently executing.
+
+Q2. What is fork()?
+
+It is a system call used to create a child process.
+
+Q3. What is the difference between parent and child process?
+
+The parent creates the child using fork(). Both execute independently.
+
+Q4. What is PID?
+
+PID stands for Process ID. It uniquely identifies a process.
+
+Q5. What is a zombie process?
+
+A terminated child process whose exit status has not yet been collected by its parent.
+
+Q6. What is an orphan process?
+
+A child process whose parent has terminated while the child is still running.
+
+Q7. How can we remove a zombie process?
+
+The parent should collect its exit status using wait() or waitpid().
+
+Q8. What is the difference between getpid() and getppid()?
+- getpid() returns the current process ID.
+- getppid() returns the parent process ID.
+Q9. What is the use of waitpid()?
+
+It makes the parent wait for a specific child process and collect its termination status.
+
+Q10. Which sorting technique is used?
+
+Bubble Sort.
