@@ -1,114 +1,88 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <pthread.h>
+#include <semaphore.h>
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-static void sort(int a[], int n, int ascending)
+#define BUFFER_SIZE 5
+#define ITEMS_TO_PRODUCE 10
+int buffer[BUFFER_SIZE];
+int in = 0;
+int out = 0;
+sem_t empty_slots;
+sem_t full_slots;
+pthread_mutex_t mutex;
+void *producer(void *arg)
 {
- for (int i = 0; i < n - 1; i++) {
- for (int j = 0; j < n - i - 1; j++) {
- int swap = ascending ? a[j] > a[j + 1] : a[j] < a[j + 1];
- if (swap) {
- int temp = a[j];
- a[j] = a[j + 1];
- a[j + 1] = temp;
+ (void)arg;
+ for (int item = 1; item <= ITEMS_TO_PRODUCE; item++) {
+ sem_wait(&empty_slots);
+ pthread_mutex_lock(&mutex);
+ buffer[in] = item;
+ printf("Producer produced: %d\n", item);
+ in = (in + 1) % BUFFER_SIZE;
+ pthread_mutex_unlock(&mutex);
+ sem_post(&full_slots);
+ sleep(1);
  }
- }
- }
+ return NULL;
 }
-static void print_array(const char *label, int a[], int n)
+void *consumer(void *arg)
 {
- printf("%s", label);
- for (int i = 0; i < n; i++)
- printf("%d ", a[i]);
- printf("\n");
+ (void)arg;
+ for (int i = 0; i < ITEMS_TO_PRODUCE; i++) {
+ sem_wait(&full_slots);
+ pthread_mutex_lock(&mutex);
+ int item = buffer[out];
+ printf("Consumer consumed: %d\n", item);
+ out = (out + 1) % BUFFER_SIZE;
+ pthread_mutex_unlock(&mutex);
+ sem_post(&empty_slots);
+ sleep(2);
+ }
+ return NULL;
 }
 int main(void)
 {
- int n;
- printf("Enter number of integers: ");
- if (scanf("%d", &n) != 1 || n <= 0) {
- fprintf(stderr, "Invalid count.\n");
+ pthread_t producer_thread;
+ pthread_t consumer_thread;
+ if (sem_init(&empty_slots, 0, BUFFER_SIZE) != 0 ||
+ sem_init(&full_slots, 0, 0) != 0 ||
+ pthread_mutex_init(&mutex, NULL) != 0) {
+ perror("Initialization failed");
  return 1;
  }
- int *a = malloc((size_t)n * sizeof(*a));
- if (a == NULL) {
- perror("malloc");
+ if (pthread_create(&producer_thread, NULL, producer, NULL) != 0 ||
+ pthread_create(&consumer_thread, NULL, consumer, NULL) != 0) {
+ perror("Thread creation failed");
  return 1;
  }
- printf("Enter %d integers: ", n);
- for (int i = 0; i < n; i++) {
- if (scanf("%d", &a[i]) != 1) {
- fprintf(stderr, "Invalid input.\n");
- free(a);
- return 1;
- }
- }
- pid_t child = fork();
- if (child < 0) {
- perror("fork");
- free(a);
- return 1;
- }
- if (child == 0) {
- sort(a, n, 0);
- printf("\nChild (PID %ld), descending: ", (long)getpid());
- print_array("", a, n);
- free(a);
- _exit(0);
- }
- sort(a, n, 1);
- printf("\nParent (PID %ld), ascending: ", (long)getpid());
- print_array("", a, n);
- int status;
- waitpid(child, &status, 0);
- printf("Parent waited for child PID %ld.\n", (long)child);
- free(a);
- /* Zombie demonstration: child exits; parent delays collecting its
-status. */
- printf("\nZombie demonstration: check child PID with ps during the 10-second pause.\n");
- child = fork();
- if (child == 0)
- _exit(0);
- printf("Child PID %ld has exited; parent will wait 10 seconds before wait().\n",
- (long)child);
- fflush(stdout);
- sleep(10);
- waitpid(child, NULL, 0);
- printf("Parent collected the child's status; zombie is removed.\n");
- /* Orphan demonstration: parent exits while child continues. */
- printf("\nOrphan demonstration:\n");
- child = fork();
- if (child < 0) {
- perror("fork");
- return 1;
- }
- if (child == 0) {
- printf("Child PID %ld started; original parent PID was %ld.\n",
- (long)getpid(), (long)getppid());
- fflush(stdout);
- sleep(3);
- printf("Child is still running; new parent PID is %ld.\n",
- (long)getppid());
- return 0;
- }
- printf("Parent PID %ld exits; child PID %ld continues.\n",
- (long)getpid(), (long)child);
+ pthread_join(producer_thread, NULL);
+ pthread_join(consumer_thread, NULL);
+ sem_destroy(&empty_slots);
+ sem_destroy(&full_slots);
+ pthread_mutex_destroy(&mutex);
  return 0;
 }
-
 /*
 OUTPUT :
-Enter number of integers: 5
-Enter 5 integers: 8 3 1 9 4
-Parent (PID 4100), ascending: 1 3 4 8 9
-Child (PID 4101), descending: 9 8 4 3 1
-Parent waited for child PID 4101.
-Zombie demonstration: check child PID with ps during the 10-second pause.
-Child PID 4102 has exited; parent will wait 10 seconds before wait().
-Parent collected the child's status; zombie is removed.
-Orphan demonstration:
-Parent PID 4100 exits; child PID 4103 continues.
-Child PID 4103 started; original parent PID was 4100.
-Child is still running; new parent PID is 1
+Producer produced: 1
+Consumer consumed: 1
+Producer produced: 2
+Producer produced: 3
+Consumer consumed: 2
+Producer produced: 4
+Producer produced: 5
+Consumer consumed: 3
+Producer produced: 6
+Producer produced: 7
+Consumer consumed: 4
+Producer produced: 8
+Consumer consumed: 5
+Producer produced: 9
+Consumer consumed: 6
+Producer produced: 10
+Consumer consumed: 7
+Consumer consumed: 8
+Consumer consumed: 9
+Consumer consumed: 10
 */
