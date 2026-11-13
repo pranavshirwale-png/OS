@@ -268,3 +268,47 @@ Character count: 81
 Word count: 11
 Line count: 2
 */
+
+"Sir/Ma'am, this program demonstrates Inter-Process Communication using FIFO, also called a Named Pipe. 
+    The parent process accepts sentences from the user and sends them to the child process through an input FIFO. 
+    The child process counts the characters, words, and lines, stores the result in a file, and sends the result back to the parent through another FIFO. 
+    Finally, the parent displays the result."
+
+    Q1. What is IPC?
+
+IPC stands for Inter-Process Communication. It allows processes to exchange information.
+
+Q2. What is FIFO?
+
+FIFO stands for First In First Out. It is a named pipe used for communication between processes.
+
+Q3. Why are two FIFOs used?
+
+One FIFO sends input from parent to child, and the second sends results from child to parent.
+
+Q4. What is the difference between pipe and FIFO?
+- Pipe is generally used between related processes and has no filesystem name.
+- FIFO has a filesystem name and can be used by unrelated processes.
+Q5. What is mkfifo()?
+
+It creates a named pipe.
+
+Q6. What is unlink()?
+
+It removes a file or named pipe from the filesystem.
+
+Q7. Why is fork() used?
+
+To create a child process for performing the calculations independently.
+
+Q8. What is waitpid() used for?
+
+It makes the parent wait for the child process to finish.
+
+Q9. What is the use of isspace()?
+
+It checks whether a character is whitespace, such as a space, tab, or newline.
+
+Q10. What is the use of write_all()?
+
+It ensures that all the given data is written successfully, handling partial writes.
