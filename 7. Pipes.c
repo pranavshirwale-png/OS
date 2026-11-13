@@ -185,3 +185,48 @@ Pipes allow related processes to communicate.
 The parent sends a pathname to the child.
 The child returns the file contents.
 */
+
+
+"Sir/Ma'am, this program demonstrates IPC using unnamed pipes in C. 
+    First, two pipes are created and a child process is generated using fork(). 
+    The parent process accepts a file pathname and sends it to the child through the first pipe.
+
+Q1. What is a pipe?
+
+A pipe is an IPC mechanism used to transfer data between processes.
+
+Q2. What is an unnamed pipe?
+
+It is a temporary communication channel without a filesystem name.
+
+Q3. Why are two pipes used?
+
+One sends the filename from parent to child, and the other sends file contents from child to parent.
+
+Q4. What is the difference between pipe and FIFO?
+- Pipe: Usually used between related processes.
+- FIFO: Has a name in the filesystem and can be used by unrelated processes.
+Q5. What is the use of pipe()?
+
+It creates a communication channel with two file descriptors: one for reading and one for writing.
+
+Q6. What is the use of fork()?
+
+It creates a child process.
+
+Q7. Why do we use close()?
+
+To close unused file descriptors and prevent unnecessary resource usage.
+
+Q8. What is the use of fread()?
+
+It reads data from a file.
+
+Q9. What is STDOUT_FILENO?
+
+It represents standard output, usually the terminal, and its value is 1.
+
+Q10. Why is waitpid() used?
+
+To make the parent wait for the child process to complete
+    The child opens the file, reads its contents, and sends them back through the second pipe. Finally, the parent displays the file contents."
