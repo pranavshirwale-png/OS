@@ -102,3 +102,50 @@ Philosopher 4 is eating (meal 3).
 Philosopher 4 has finished eating.
 All philosophers finished without deadlock.
 */
+
+Sir/Ma'am, this program demonstrates the Dining Philosophers Problem in Operating Systems. 
+ There are five philosophers sitting around a circular table with five forks. 
+ Each philosopher needs two forks to eat.
+Threads represent philosophers, mutex locks represent forks, and a semaphore allows only four philosophers to compete for forks at a time. 
+ This helps prevent deadlock.
+
+
+ Q1. What is the Dining Philosophers Problem?
+
+It is a synchronization problem where five philosophers share five forks and need two forks to eat.
+
+Q2. Why are five threads created?
+
+Because each philosopher is represented by one thread.
+
+Q3. Why are mutex locks used?
+
+To ensure that only one philosopher uses a particular fork at a time.
+
+Q4. Why is a semaphore used?
+
+To allow a maximum of four philosophers to compete for forks simultaneously.
+
+Q5. What is deadlock?
+
+A situation where processes wait indefinitely for resources.
+
+Q6. How is deadlock prevented in this program?
+
+By allowing only four philosophers into the fork-acquisition process at a time, breaking the circular-wait condition.
+
+Q7. What is the use of % in this program?
+
+It helps calculate fork positions in a circular arrangement.
+
+Q8. What is the critical section?
+
+The section where a philosopher locks forks and accesses shared resources.
+
+Q9. What is the difference between semaphore and mutex?
+
+A semaphore controls resource availability, while a mutex provides exclusive access to a resource.
+
+Q10. How many meals does each philosopher eat?
+
+Three meals.
