@@ -88,6 +88,9 @@ Consumer consumed: 10
 */
 
 
+gcc filename.c -o output -pthread
+./output
+
 "Sir/Ma'am, this program demonstrates the Producer-Consumer problem in Operating Systems. 
  The producer generates 10 items and stores them in a shared buffer of size 5.
  The consumer takes items from the buffer. 
