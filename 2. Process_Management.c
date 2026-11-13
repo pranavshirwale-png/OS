@@ -112,3 +112,49 @@ Parent PID 4100 exits; child PID 4103 continues.
 Child PID 4103 started; original parent PID was 4100.
 Child is still running; new parent PID is 1
 */
+
+
+
+"Sir/Ma'am, this program demonstrates process management in Linux using C. It uses the fork() system call to create a child process. 
+ The parent process sorts the numbers in ascending order, while the child process sorts them in descending order. 
+ It also demonstrates zombie and orphan processes using process creation and termination
+
+Q1. What is a process?
+
+A process is a program that is currently executing.
+
+Q2. What is fork()?
+
+It is a system call used to create a child process.
+
+Q3. What is the difference between parent and child process?
+
+The parent creates the child using fork(). Both execute independently.
+
+Q4. What is PID?
+
+PID stands for Process ID. It uniquely identifies a process.
+
+Q5. What is a zombie process?
+
+A terminated child process whose exit status has not yet been collected by its parent.
+
+Q6. What is an orphan process?
+
+A child process whose parent has terminated while the child is still running.
+
+Q7. How can we remove a zombie process?
+
+The parent should collect its exit status using wait() or waitpid().
+
+Q8. What is the difference between getpid() and getppid()?
+- getpid() returns the current process ID.
+- getppid() returns the parent process ID.
+Q9. What is the use of waitpid()?
+
+It makes the parent wait for a specific child process and collect its termination status.
+
+Q10. Which sorting technique is used?
+
+Bubble Sort. 
+
