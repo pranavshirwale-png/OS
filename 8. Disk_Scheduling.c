@@ -225,7 +225,44 @@ int main()
 
 /*OUTPUT :
 INPUT
-Enter number of disk requests (1-100): 8
+Enter number of disk requests (1-100): 8Q1. What is disk scheduling?
+
+It is the method of deciding the order in which disk read/write requests are processed.
+
+Q2. Why is disk scheduling required?
+
+To reduce disk head movement and improve performance.
+
+Q3. What is SSTF?
+
+Shortest Seek Time First selects the request nearest to the current head position.
+
+Q4. What is SCAN?
+
+The disk head moves in one direction to the end and then reverses, like an elevator.
+
+Q5. What is C-LOOK?
+
+The head serves requests in one direction and jumps to the lowest pending request instead of going to the disk end.
+
+Q6. Which algorithm gives minimum head movement in this output?
+
+SSTF, with 236 cylinders.
+
+Q7. What is starvation in SSTF?
+
+A request may wait for a long time if closer requests keep arriving.
+
+Q8. What is the difference between SCAN and C-LOOK?
+- SCAN travels to the physical end of the disk before reversing.
+- C-LOOK jumps from the highest pending request to the lowest pending request.
+Q9. What is cylinder?
+
+A cylinder represents the same track position across all disk platters.
+
+Q10. What is abs() used for?
+
+It calculates the absolute difference between two cylinder positions.
 Enter request queue: 98 183 37 122 14 124 65 67
 Enter initial head position: 53
 Enter maximum cylinder number: 199
@@ -238,3 +275,10 @@ Total head movement: 331 cylinders
 C-LOOK service order: 65 -> 67 -> 98 -> 122 -> 124 -> 183 -> 14 -> 37
 Total head movement: 322 cylinders
 */
+
+"Sir/Ma'am, this program implements three disk scheduling algorithms.
+    Disk scheduling decides the order in which disk requests are served to reduce head movement and improve performance. 
+    The program takes the request queue, initial head position and maximum cylinder number as input.
+    It then calculates the service order and total head movement using SSTF, SCAN and C-LOOK algorithms."
+
+    
